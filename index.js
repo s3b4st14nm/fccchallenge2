@@ -25,7 +25,22 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+//Challenge #2, FCC
+app.get("/api/whoami", function (req, res) {
 
+  let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  let ln = req.headers["accept-language"];
+  let sw = req.headers["user-agent"];
+
+  let rs={
+    "ipaddress": ip,
+    "language": ln,
+    "software": sw
+  };
+  
+  console.log(rs);
+  res.json(rs);
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
